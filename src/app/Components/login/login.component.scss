@@ -1,0 +1,25 @@
+/* Agrega estas reglas al archivo CSS */
+.login-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  height: 100vh;           /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+}
+
+.login-form {
+  max-width: 400px; /* Aumenta el ancho máximo del formulario */
+  width: 100%;      /* Asegura que el formulario use el 100% del ancho disponible hasta el máximo */
+}
+
+.login-form-margin {
+  margin-bottom: 20px; /* Aumenta el margen inferior */
+}
+
+.login-form-forgot {
+  float: none; /* Remueve el flotado para centrar el enlace de "Forgot password" */
+  text-align: right;
+}
+
+.login-form-button {
+  width: 100%; /* Mantiene el botón a todo lo ancho del formulario */
+}

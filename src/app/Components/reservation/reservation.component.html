@@ -1,15 +1,104 @@
-<p>
-  <button nz-button nzType="primary" (click)="showModal()">
-    <span>Show Modal</span>
-  </button>
-</p>
+<div>
 
-<nz-modal
-      [(nzVisible)]="isVisible"
-      nzTitle="Modal Title"
-      (nzOnCancel)="handleCancel()"
-      (nzOnOk)="handleOk()"
-      [nzOkLoading]="isOkLoading"
-    >
-      <p *nzModalContent>Modal Content</p>
-    </nz-modal>
+  <div style="float: right;">
+    <button nz-button nzType="primary" [nzSize]="size" (click)="showModal()">
+      <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+      Crear Orden
+    </button>
+  </div>
+
+
+  <nz-table #nestedTable [nzData]="listOfParentData" [nzPageSize]="10">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Reservation Start</th>
+        <th>Reservation End</th>
+        <th>Total Cost</th>
+        <th>Date of Reservation</th>
+        <th>Estatus</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of nestedTable.data; let i = index">
+        <tr>
+          <td (click)="data.expand = !data.expand" [nzExpand]="data.expand"></td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.reservationStartDate }}</td>
+          <td>{{ data.reservationEndDate }}</td>
+          <td>{{ data.totalReserveCost || 'N/A' }}</td>
+          <td>{{ data.reservationDate }}</td>
+          <td>{{ data.status }}</td>
+          <td>
+            <a class="Icons" (click)="showModalEdit(data.id)"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+            <a class="Icons" (click)="DeleteReservation(data.id)"><span nz-icon nzType="delete"
+                nzTheme="outline"></span></a>
+            <a (click)="CancelReservation(data.id)" class="Icons"><span nz-icon nzType="stop"
+                nzTheme="outline"></span></a>
+            <a (click)="BuyReservation(data.id)" class="Icons"><span nz-icon nzType="dollar"
+                nzTheme="outline"></span></a>
+          </td>
+        </tr>
+        <tr *ngIf="data.expand">
+          <td colspan="6">
+            <nz-table #innerTable [nzData]="data.details" nzSize="middle" [nzShowPagination]="false">
+              <thead>
+                <tr>
+                  <th>Service Name</th>
+                  <th>Service Cost</th>
+                </tr>
+              </thead>
+    <tbody>
+      <tr *ngFor="let detail of innerTable.data">
+        <td>{{ detail.service }}</td>
+        <td>{{ detail.serviceCost | currency }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  </td>
+  </tr>
+  </ng-container>
+  </tbody>
+  </nz-table>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Modal Title" (nzOnCancel)="handleCancel()" [nzWidth]="'90vw'"
+    nzClass="custom-modal">
+
+    <div *nzModalContent>
+      <div class="services-grid">
+        <div *ngFor="let service of services">
+          <nz-card [nzTitle]="service.name" [nzExtra]="extraTemplate">
+            <p>{{ service.description }}</p>
+            <p>Price: {{ service.price }}</p>
+          </nz-card>
+          <ng-template #extraTemplate>
+            <label nz-checkbox [(ngModel)]="selectedservices[service.id]"
+              (ngModelChange)="onCheckboxChange(service.id, $event, service.price)">
+              Reservar
+            </label>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="Fechas">
+        <h3>Seleccione las fechas en que quiere reservar</h3>
+        <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" [nzSize]="'large'"
+          [nzFormat]="'YYYY-MM-dd'" style="width: 100%;">
+        </nz-range-picker>
+      </div>
+    </div>
+
+    <!-- Personalización del Footer para los botones -->
+    <div *nzModalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
+      <button nz-button nzType="primary" [nzLoading]="isOkLoading" (click)="handleOk()">
+        {{ isEdit ? 'Editar' : 'Guardar' }}
+      </button>
+    </div>
+
+  </nz-modal>
+
+
+</div>

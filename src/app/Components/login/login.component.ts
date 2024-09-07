@@ -68,7 +68,9 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('token', token);
               }
 
-              this.route.navigate(['reservations']);
+              this.route.navigate(['reservations']).then(() => {
+                location.reload();
+              });
             } else {
               this.auxiliarService.toastFuntionError(response.res.message);
             }

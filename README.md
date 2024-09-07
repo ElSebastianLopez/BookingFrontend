@@ -1,27 +1,97 @@
-# BookingFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
+# BookingFrontend
 
-## Development server
+**BookingFrontend** es una aplicación **Angular 18** para la gestión de reservas de servicios de hoteles y restaurantes. Proporciona un sistema de login y una funcionalidad protegida para gestionar reservas.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Requisitos previos
 
-## Code scaffolding
+Antes de empezar, asegúrate de tener las siguientes herramientas instaladas:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Node.js**: [Descargar e instalar Node.js](https://nodejs.org/)
+- **npm**: Generalmente se instala con Node.js. Verifica que esté instalado usando el siguiente comando:
 
-## Build
+```bash
+npm --version
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalación
 
-## Running unit tests
+Sigue estos pasos para configurar el entorno de desarrollo y correr el proyecto:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Clona el repositorio:
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/tu-usuario/BookingFrontend.git
+cd BookingFrontend
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Instala las dependencias necesarias ejecutando:
 
-## Further help
+```bash
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para correr el servidor de desarrollo, ejecuta:
+
+```bash
+ng serve
+```
+
+Accede a la aplicación desde tu navegador en:
+
+```bash
+http://localhost:4200
+```
+
+## Estructura del Proyecto
+
+El proyecto sigue la estructura estándar de Angular. Algunas carpetas importantes son:
+
+- `app/Components`: Contiene los componentes principales de la aplicación como LoginComponent y ReservationComponent.
+- `app/guard`: Contiene los guards para proteger rutas como GuardGuard.
+- `app/Interceptor`: Contiene los interceptores que pueden ser utilizados para manejar peticiones HTTP.
+- `app/Services`: Contiene los servicios que conectan con el backend.
+
+### Archivos importantes:
+
+- `app-routing.module.ts`: Archivo de rutas de la aplicación.
+- `app.component.html`: Componente principal de la interfaz de usuario.
+- `angular.json`: Archivo de configuración del proyecto Angular.
+- `package.json`: Contiene los scripts y dependencias del proyecto.
+
+## Rutas
+
+Estas son las rutas principales configuradas en `app-routing.module.ts`:
+
+- `/`: Redirige al componente LoginComponent.
+- `/login`: Muestra el formulario de login.
+- `/reservations`: Muestra el componente ReservationComponent, protegido por el GuardGuard.
+
+## Estilos y Temas
+
+La aplicación utiliza los siguientes archivos de estilos:
+
+- `styles.scss`: Estilos globales de la aplicación.
+- `theme.less`: Archivo para la configuración de temas (si aplicable).
+
+## Compilación para Producción
+
+Para generar una versión lista para producción, ejecuta el siguiente comando:
+
+```bash
+ng build --prod
+```
+
+Este comando genera los archivos necesarios en la carpeta `dist/`, los cuales pueden ser desplegados en un servidor web.
+
+## Contribución
+
+1. Haz un fork del proyecto.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT.
